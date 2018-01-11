@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.SzNotec.OrderSystem.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.SzNotec.OrderSystem.entity.User" >
+    <id column="userSNo" property="usersno" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="empSno" property="empsno" jdbcType="INTEGER" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="CHAR" />
+    <result column="cmt" property="cmt" jdbcType="CHAR" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userSNo, uid, empSno, pwd, email, cmt, updateTime
+  </sql>
+  <select id="selectByUid" resultMap="BaseResultMap"
+          parameterType="com.SzNotec.OrderSystem.entity.User" >
+    select
+    <include refid="Base_Column_List" />
+    from Users
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+  <select id="userSignIn" resultMap="BaseResultMap"
+          parameterType="com.SzNotec.OrderSystem.entity.User" >
+    select
+    <include refid="Base_Column_List" />
+    from Users
+    where uid = #{uid,jdbcType=VARCHAR} and pwd = #{pwd, jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Users
+    where userSNo = #{usersno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Users
+    where userSNo = #{usersno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.SzNotec.OrderSystem.entity.User" >
+    insert into Users (userSNo, uid, empSno, 
+      pwd, email, cmt, updateTime
+      )
+    values (#{usersno,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{empsno,jdbcType=INTEGER}, 
+      #{pwd,jdbcType=VARCHAR}, #{email,jdbcType=CHAR}, #{cmt,jdbcType=CHAR}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.SzNotec.OrderSystem.entity.User" >
+    insert into Users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usersno != null" >
+        userSNo,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="empsno != null" >
+        empSno,
+      </if>
+      <if test="pwd != null" >
+        pwd,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="cmt != null" >
+        cmt,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usersno != null" >
+        #{usersno,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="empsno != null" >
+        #{empsno,jdbcType=INTEGER},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=CHAR},
+      </if>
+      <if test="cmt != null" >
+        #{cmt,jdbcType=CHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.SzNotec.OrderSystem.entity.User" >
+    update Users
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="empsno != null" >
+        empSno = #{empsno,jdbcType=INTEGER},
+      </if>
+      <if test="pwd != null" >
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=CHAR},
+      </if>
+      <if test="cmt != null" >
+        cmt = #{cmt,jdbcType=CHAR},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where userSNo = #{usersno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.SzNotec.OrderSystem.entity.User" >
+    update Users
+    set uid = #{uid,jdbcType=VARCHAR},
+      empSno = #{empsno,jdbcType=INTEGER},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      email = #{email,jdbcType=CHAR},
+      cmt = #{cmt,jdbcType=CHAR},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where userSNo = #{usersno,jdbcType=INTEGER}
+  </update>
+</mapper>

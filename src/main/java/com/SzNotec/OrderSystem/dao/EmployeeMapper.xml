@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.SzNotec.OrderSystem.dao.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.SzNotec.OrderSystem.entity.Employee" >
+    <id column="empSNo" property="empsno" jdbcType="INTEGER" />
+    <result column="groupSNo" property="groupsno" jdbcType="INTEGER" />
+    <result column="jobSNo" property="jobsno" jdbcType="INTEGER" />
+    <result column="contactSNo" property="contactsno" jdbcType="INTEGER" />
+    <result column="idNo" property="idno" jdbcType="VARCHAR" />
+    <result column="basicSalary" property="basicsalary" jdbcType="INTEGER" />
+    <result column="onboardDate" property="onboarddate" jdbcType="TIMESTAMP" />
+    <result column="accountSNo" property="accountsno" jdbcType="INTEGER" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="cmt" property="cmt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    empSNo, groupSNo, jobSNo, contactSNo, idNo, basicSalary, onboardDate, accountSNo, 
+    updateTime, cmt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Employees
+    where empSNo = #{empsno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Employees
+    where empSNo = #{empsno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.SzNotec.OrderSystem.entity.Employee" >
+    insert into Employees (empSNo, groupSNo, jobSNo, 
+      contactSNo, idNo, basicSalary, 
+      onboardDate, accountSNo, updateTime, 
+      cmt)
+    values (#{empsno,jdbcType=INTEGER}, #{groupsno,jdbcType=INTEGER}, #{jobsno,jdbcType=INTEGER}, 
+      #{contactsno,jdbcType=INTEGER}, #{idno,jdbcType=VARCHAR}, #{basicsalary,jdbcType=INTEGER}, 
+      #{onboarddate,jdbcType=TIMESTAMP}, #{accountsno,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{cmt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.SzNotec.OrderSystem.entity.Employee" >
+    insert into Employees
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="empsno != null" >
+        empSNo,
+      </if>
+      <if test="groupsno != null" >
+        groupSNo,
+      </if>
+      <if test="jobsno != null" >
+        jobSNo,
+      </if>
+      <if test="contactsno != null" >
+        contactSNo,
+      </if>
+      <if test="idno != null" >
+        idNo,
+      </if>
+      <if test="basicsalary != null" >
+        basicSalary,
+      </if>
+      <if test="onboarddate != null" >
+        onboardDate,
+      </if>
+      <if test="accountsno != null" >
+        accountSNo,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="cmt != null" >
+        cmt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="empsno != null" >
+        #{empsno,jdbcType=INTEGER},
+      </if>
+      <if test="groupsno != null" >
+        #{groupsno,jdbcType=INTEGER},
+      </if>
+      <if test="jobsno != null" >
+        #{jobsno,jdbcType=INTEGER},
+      </if>
+      <if test="contactsno != null" >
+        #{contactsno,jdbcType=INTEGER},
+      </if>
+      <if test="idno != null" >
+        #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="basicsalary != null" >
+        #{basicsalary,jdbcType=INTEGER},
+      </if>
+      <if test="onboarddate != null" >
+        #{onboarddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountsno != null" >
+        #{accountsno,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cmt != null" >
+        #{cmt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.SzNotec.OrderSystem.entity.Employee" >
+    update Employees
+    <set >
+      <if test="groupsno != null" >
+        groupSNo = #{groupsno,jdbcType=INTEGER},
+      </if>
+      <if test="jobsno != null" >
+        jobSNo = #{jobsno,jdbcType=INTEGER},
+      </if>
+      <if test="contactsno != null" >
+        contactSNo = #{contactsno,jdbcType=INTEGER},
+      </if>
+      <if test="idno != null" >
+        idNo = #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="basicsalary != null" >
+        basicSalary = #{basicsalary,jdbcType=INTEGER},
+      </if>
+      <if test="onboarddate != null" >
+        onboardDate = #{onboarddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountsno != null" >
+        accountSNo = #{accountsno,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cmt != null" >
+        cmt = #{cmt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where empSNo = #{empsno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.SzNotec.OrderSystem.entity.Employee" >
+    update Employees
+    set groupSNo = #{groupsno,jdbcType=INTEGER},
+      jobSNo = #{jobsno,jdbcType=INTEGER},
+      contactSNo = #{contactsno,jdbcType=INTEGER},
+      idNo = #{idno,jdbcType=VARCHAR},
+      basicSalary = #{basicsalary,jdbcType=INTEGER},
+      onboardDate = #{onboarddate,jdbcType=TIMESTAMP},
+      accountSNo = #{accountsno,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      cmt = #{cmt,jdbcType=VARCHAR}
+    where empSNo = #{empsno,jdbcType=INTEGER}
+  </update>
+</mapper>
